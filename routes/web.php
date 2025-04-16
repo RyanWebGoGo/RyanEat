@@ -16,7 +16,8 @@ Route::get('/ryaneat-index2', function () {
 //=================== RyanEat ===================
 
 
-Route::view('/', 'welcome');
+Route::view('/', 'home-takeaway')->name('takeaway-home');
+Route::view('/cart', 'cart-takeaway')->name('takeaway-cart');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
