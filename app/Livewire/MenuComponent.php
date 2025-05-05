@@ -47,12 +47,16 @@ class MenuComponent extends Component
         } else {
             $cart[$itemId] = [ // Add new item
                 'name' => $addToCart_item->name,
-                'price' => $addToCart_item->price,
+                'price' => $addToCart_item->discount_price,
                 'quantity' => 1,
             ];
         }
 
         Session::put('cart', $cart); // Save updated cart
+
+        $this->closeModal();
+
+        $this->dispatch('cartUpdated');
 
     }
 

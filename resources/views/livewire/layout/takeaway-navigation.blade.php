@@ -1,6 +1,6 @@
 <nav class="bg-red-500 text-white p-4">
     <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-2xl font-bold">RyanEat Takeaway</h1>
+        <h1 class="text-2xl font-bold"><a href="{{ route('takeaway-home') }}" wire:navigate>RyanEat Takeaway</a></h1>
 
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center space-x-6">

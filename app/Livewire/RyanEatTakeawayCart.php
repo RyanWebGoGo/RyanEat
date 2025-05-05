@@ -3,24 +3,41 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Session;
+
+use App\Services\RyanEatTakeawayCartService;
 
 class RyanEatTakeawayCart extends Component
 {
-    public function removeFromCart($productId)
+    public $cart = [];
+    public $total;
+
+    protected $listeners = ['cartUpdated' => 'refreshCart'];
+
+    public function mount(RyanEatTakeawayCartService $cartService)
     {
-        $cart = Session::get('cart', []);
-        if (isset($cart[$productId])) {
-            unset($cart[$productId]);
-            Session::put('cart', $cart);
-            $this->dispatch('cart-updated');
-        }
+        $this->refreshCart($cartService);
     }
+
+    public function refreshCart(RyanEatTakeawayCartService $cartService)
+    {
+        $this->cart = $cartService->getCart();
+    }
+
+    public function removeFromCart($productId, RyanEatTakeawayCartService $cartService)
+    {
+        $cartService->removeFromCart($productId);
+        $this->dispatch('cartUpdated');
+    }
+
+    public function getTotal(RyanEatTakeawayCartService $cartService){
+        $this->total = $cartService->getTotal();
+    }
+
 
     public function render()
     {
-        $cart = Session::get('cart', []);
-        return view('livewire.ryan-eat-takeaway-cart', ['cart' => $cart]);
+        $this->total = (new RyanEatTakeawayCartService())->getTotal();
+        return view('livewire.ryan-eat-takeaway-cart');
     }
 
 }

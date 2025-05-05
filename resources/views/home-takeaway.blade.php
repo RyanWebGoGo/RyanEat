@@ -4,4 +4,6 @@
 
 @section('content')
     @livewire('MenuComponent')
+
+    @livewire('RyanEatTakeawayCartIcon')
 @endsection

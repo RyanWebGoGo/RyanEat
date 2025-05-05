@@ -18,6 +18,8 @@ Route::get('/ryaneat-index2', function () {
 
 Route::view('/', 'home-takeaway')->name('takeaway-home');
 Route::view('/cart', 'cart-takeaway')->name('takeaway-cart');
+Route::view('/checkout', 'checkout-takeaway')->name('takeaway-checkout');
+
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
